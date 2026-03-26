@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using System.IO;
+using SimpleCSVEditorByWPF.Services;
 using System.Windows;
 
 namespace SimpleCSVEditorByWPF
@@ -50,14 +50,14 @@ namespace SimpleCSVEditorByWPF
             return string.Empty;
         }
 
-        public void LoadCsvData(string filePath)
+        public void LoadCevFileButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var reader = new StreamReader(filePath))
+            if (string.IsNullOrEmpty(CsvFilePathTextBox.Text))
             {
-
+                return;
             }
 
-
+            var list = CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text);
         }
     }
 }
