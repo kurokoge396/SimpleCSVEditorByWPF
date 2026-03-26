@@ -87,8 +87,13 @@ namespace SimpleCSVEditorByWPF
         /// <param name="e">e</param>
         public void SaveCsvFileButton_Click(object sender, RoutedEventArgs e)
         {
-            // 1. 保存先パスを取得
-            string filePath = FilePathService.GetSaveFilePath();
+            if (!UserModels.Any())
+            {
+                MessageBox.Show("保存するデータがありません。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var filePath = FilePathService.GetSaveFilePath();
 
             if (string.IsNullOrEmpty(filePath))
             {
@@ -107,7 +112,8 @@ namespace SimpleCSVEditorByWPF
             try
             {
                 CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
-                MessageBox.Show("保存が完了しました");
+                MessageBox.Show("保存が完了しました", "CSV読み込みくん", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             catch (Exception ex)
             {
