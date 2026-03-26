@@ -28,7 +28,7 @@
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBox x:Name="CsvFilePathTextBox" AcceptsReturn="True" Margin="5" TextWrapping="Wrap" Width="585"/>
                     <Button Content="ファイル選択" Width="80" Margin="5" Click="SelectFileButton_Click"/>
-                    <Button Content="ファイル読込" Width="80" Margin="5"/>
+                    <Button Content="ファイル読込" Width="80" Margin="5" Click="LoadCevFileButton_Click"/>
                 </StackPanel>
 
                 <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True"/>

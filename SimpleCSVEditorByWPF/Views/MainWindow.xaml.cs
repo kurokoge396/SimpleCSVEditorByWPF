@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
+using SimpleCSVEditorByWPF.Models;
 using SimpleCSVEditorByWPF.Services;
+using System.ComponentModel;
 using System.Windows;
 
 namespace SimpleCSVEditorByWPF
@@ -9,6 +11,12 @@ namespace SimpleCSVEditorByWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        /// <summary>
+        /// ユーザーデータのリストを保持するプロパティ
+        /// </summary>
+        public BindingList<UserModel> UserModels = new BindingList<UserModel>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +58,11 @@ namespace SimpleCSVEditorByWPF
             return string.Empty;
         }
 
+        /// <summary>
+        /// ファイル読み込みボタンのクリックイベントハンドラー
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
         public void LoadCevFileButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(CsvFilePathTextBox.Text))
@@ -57,7 +70,8 @@ namespace SimpleCSVEditorByWPF
                 return;
             }
 
-            var list = CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text);
+            UserModels = new BindingList<UserModel>(CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text));
+            CsvDataGridView.ItemsSource = UserModels;
         }
     }
 }
