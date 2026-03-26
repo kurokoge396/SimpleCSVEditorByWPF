@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36930.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSVEditorByWPF", "SimpleCSVEditorByWPF\SimpleCSVEditorByWPF.csproj", "{64CDBFB7-4EEF-4183-807B-D1516518C986}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64CDBFB7-4EEF-4183-807B-D1516518C986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CDBFB7-4EEF-4183-807B-D1516518C986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CDBFB7-4EEF-4183-807B-D1516518C986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CDBFB7-4EEF-4183-807B-D1516518C986}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7352404-68A5-4219-8AE1-96C29850B761}
+	EndGlobalSection
+EndGlobal
