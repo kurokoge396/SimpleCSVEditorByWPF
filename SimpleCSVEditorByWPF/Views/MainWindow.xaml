@@ -16,7 +16,7 @@
             <!-- 下部：ボタンエリア -->
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
             HorizontalAlignment="Right" Margin="10">
-                <Button Content="保存" Width="80" Margin="5"/>
+                <Button Content="保存" Width="80" Margin="5" Click="SaveCsvFileButton_Click"/>
             </StackPanel>
 
             <!-- 中央：メモエリア -->

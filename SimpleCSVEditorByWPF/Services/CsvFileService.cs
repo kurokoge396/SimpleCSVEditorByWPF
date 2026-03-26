@@ -43,7 +43,7 @@ namespace SimpleCSVEditorByWPF.Services
         /// <param name="userData">ユーザーデータ</param>
         public static void SaveUserDataCsvData(string filePath, List<UserModel> userData)
         {
-            using (var writer = new StreamWriter(filePath))
+            using (var writer = new StreamWriter(filePath, true, Encoding.UTF8))
             {
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
