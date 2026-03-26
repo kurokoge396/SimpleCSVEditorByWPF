@@ -2,13 +2,33 @@
 
 namespace SimpleCSVEditorByWPF.Services
 {
-    public static class FilePathService
+    /// <summary>
+    /// ファイル操作のインターフェース
+    /// </summary>
+    public interface IFileDialogService
     {
         /// <summary>
         /// ファイル選択ダイアログを表示する
         /// </summary>
         /// <returns>ファイルパス</returns>
-        public static string SelectFilePath()
+        string SelectFilePath();
+        /// <summary>
+        /// ファイル保存ダイアログを表示して、ユーザーが選択した保存先のフルパスを取得するメソッド
+        /// </summary>
+        /// <returns>ファイルパス</returns>
+        string GetSaveFilePath();
+    }
+
+    /// <summary>
+    /// ファイル操作クラス
+    /// </summary>
+    public class FileDialogService : IFileDialogService
+    {
+        /// <summary>
+        /// ファイル選択ダイアログを表示する
+        /// </summary>
+        /// <returns>ファイルパス</returns>
+        public string SelectFilePath()
         {
             // ダイアログのインスタンスを生成
             var openFileDialog = new OpenFileDialog();
@@ -30,7 +50,7 @@ namespace SimpleCSVEditorByWPF.Services
         /// ファイル保存ダイアログを表示して、ユーザーが選択した保存先のフルパスを取得するメソッド
         /// </summary>
         /// <returns>ファイルパス</returns>
-        public static string GetSaveFilePath()
+        public string GetSaveFilePath()
         {
             // 保存ダイアログのインスタンスを生成
             var saveFileDialog = new SaveFileDialog();

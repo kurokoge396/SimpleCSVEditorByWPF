@@ -3,7 +3,6 @@ using SimpleCSVEditorByWPF.Services;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace SimpleCSVEditorByWPF
 {
@@ -23,62 +22,7 @@ namespace SimpleCSVEditorByWPF
             InitializeComponent();
         }
 
-        /// <summary>
-        /// ファイル選択ボタンのクリックイベントハンドラー
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">e</param>
-        private void SelectFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            var path = FilePathService.SelectFilePath();
-            if (!string.IsNullOrEmpty(path))
-            {
-                CsvFilePathTextBox.Text = path;
-            }
-        }
 
-        /// <summary>
-        /// ファイル読み込みボタンのクリックイベントハンドラー
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">e</param>
-        public void LoadCevFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(CsvFilePathTextBox.Text))
-            {
-                return;
-            }
-
-            UserModels = new BindingList<UserModel>(CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text));
-            CsvDataGridView.ItemsSource = UserModels;
-        }
-
-        /// <summary>
-        /// ヘッダーの自動生成イベントハンドラー
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">e</param>
-        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Id":
-                    e.Column.Header = "ID";
-                    break;
-                case "Name":
-                    e.Column.Header = "名前";
-                    break;
-                case "Password":
-                    e.Column.Header = "パスワード";
-                    break;
-                case "IsDeleted":
-                    e.Column.Header = "削除フラグ";
-                    break;
-                default:
-                    e.Column.Header = e.PropertyName;
-                    break;
-            }
-        }
 
         /// <summary>
         /// 保存ボタンのクリックイベントハンドラー
@@ -93,7 +37,8 @@ namespace SimpleCSVEditorByWPF
                 return;
             }
 
-            var filePath = FilePathService.GetSaveFilePath();
+            //var filePath = FileDialogService.GetSaveFilePath();
+            var filePath = string.Empty;
 
             if (string.IsNullOrEmpty(filePath))
             {

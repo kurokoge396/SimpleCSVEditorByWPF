@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleCSVEditorByWPF"
+        xmlns:views="clr-namespace:SimpleCSVEditorByWPF.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -25,13 +26,16 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+
+                <views:CsvFileReadView x:Name="CsvFileReadView" Grid.Row="0"/>
+                <!--<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBox x:Name="CsvFilePathTextBox" AcceptsReturn="True" Margin="5" TextWrapping="Wrap" Width="585"/>
                     <Button Content="ファイル選択" Width="80" Margin="5" Click="SelectFileButton_Click"/>
                     <Button Content="ファイル読込" Width="80" Margin="5" Click="LoadCevFileButton_Click"/>
-                </StackPanel>
+                </StackPanel>-->
 
-                <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>
+                <!--<DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>-->
+                <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"/>
             </Grid>
         </DockPanel>
     </Grid>
