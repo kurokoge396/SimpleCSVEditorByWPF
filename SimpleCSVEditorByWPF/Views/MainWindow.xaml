@@ -31,7 +31,7 @@
                     <Button Content="ファイル読込" Width="80" Margin="5" Click="LoadCevFileButton_Click"/>
                 </StackPanel>
 
-                <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True"/>
+                <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>
             </Grid>
         </DockPanel>
     </Grid>

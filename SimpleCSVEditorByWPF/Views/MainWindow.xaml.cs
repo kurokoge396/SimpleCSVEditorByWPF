@@ -3,6 +3,7 @@ using SimpleCSVEditorByWPF.Models;
 using SimpleCSVEditorByWPF.Services;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SimpleCSVEditorByWPF
 {
@@ -72,6 +73,28 @@ namespace SimpleCSVEditorByWPF
 
             UserModels = new BindingList<UserModel>(CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text));
             CsvDataGridView.ItemsSource = UserModels;
+        }
+
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "Id":
+                    e.Column.Header = "ID";
+                    break;
+                case "Name":
+                    e.Column.Header = "名前";
+                    break;
+                case "Password":
+                    e.Column.Header = "パスワード";
+                    break;
+                case "IsDeleted":
+                    e.Column.Header = "削除フラグ";
+                    break;
+                default:
+                    e.Column.Header = e.PropertyName;
+                    break;
+            }
         }
     }
 }
