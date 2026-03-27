@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:SimpleCSVEditorByWPF.Views"
              xmlns:viewmodels="clr-namespace:SimpleCSVEditorByWPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:CsvEditorViewModel}"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:SimpleCSVEditorByWPF.Behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -15,7 +17,11 @@
         </Grid.RowDefinitions>
 
         <DataGrid Grid.Row="0" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"
-                  ItemsSource="{Binding UserModels, Mode=TwoWay}"/>
+                  ItemsSource="{Binding UserModels, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridHeaderBehavior/>
+            </i:Interaction.Behaviors>
+        </DataGrid>
         <Button Grid.Row="1" Content="保存" Width="80" Margin="5" Command="{Binding SaveCsvFile}" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

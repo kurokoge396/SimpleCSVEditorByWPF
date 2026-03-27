@@ -10,7 +10,12 @@ using System.Windows;
 
 namespace SimpleCSVEditorByWPF.ViewModels
 {
-    public partial class CsvEditorViewModel : ObservableObject
+    public interface IHeaderConverter
+    {
+        string ConvertHeader(string propertyName);
+    }
+
+    public partial class CsvEditorViewModel : ObservableObject, IHeaderConverter
     {
         [ObservableProperty]
         private ObservableCollection<UserModel> userModels;
@@ -21,6 +26,23 @@ namespace SimpleCSVEditorByWPF.ViewModels
             {
                 UserModels = new ObservableCollection<UserModel>(m.Data);
             });
+        }
+
+        /// <summary>
+        /// ヘッダー名をDatagridの列名に変換する
+        /// </summary>
+        /// <param name="propertyName">プロパティ名</param>
+        /// <returns>列名</returns>
+        public string ConvertHeader(string propertyName)
+        {
+            return propertyName switch
+            {
+                "Id" => "ID",
+                "Name" => "名前",
+                "Password" => "パスワード",
+                "IsDeleted" => "削除フラグ",
+                _ => propertyName
+            };
         }
 
         /// <summary>

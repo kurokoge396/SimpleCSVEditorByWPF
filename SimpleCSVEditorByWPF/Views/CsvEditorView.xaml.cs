@@ -1,5 +1,4 @@
-﻿using SimpleCSVEditorByWPF.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace SimpleCSVEditorByWPF.Views
 {
@@ -11,11 +10,6 @@ namespace SimpleCSVEditorByWPF.Views
         public CsvEditorView()
         {
             InitializeComponent();
-        }
-
-        public void SetViewModel(CsvEditorViewModel viewModel)
-        {
-            DataContext = viewModel;
         }
     }
 }
