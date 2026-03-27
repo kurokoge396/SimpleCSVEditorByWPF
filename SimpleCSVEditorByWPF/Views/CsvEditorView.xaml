@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="SimpleCSVEditorByWPF.Views.CsvEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleCSVEditorByWPF.Views"
+             xmlns:viewmodels="clr-namespace:SimpleCSVEditorByWPF.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:CsvEditorViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"/>
+        <Button Grid.Row="1" Content="保存" Width="80" Margin="5" Command="{Binding SaveCsvFile}" HorizontalAlignment="Right" />
+    </Grid>
+</UserControl>

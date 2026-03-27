@@ -36,6 +36,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// <summary>
         /// ファイル読み込み
         /// </summary>
+        [RelayCommand]
         public void LoadCevFile()
         {
             if (string.IsNullOrEmpty(CsvFilePath))

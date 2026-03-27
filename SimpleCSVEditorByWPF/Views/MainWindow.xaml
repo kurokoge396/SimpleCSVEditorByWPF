@@ -17,7 +17,7 @@
             <!-- 下部：ボタンエリア -->
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
             HorizontalAlignment="Right" Margin="10">
-                <Button Content="保存" Width="80" Margin="5" Click="SaveCsvFileButton_Click"/>
+                <Button Content="保存" Width="80" Margin="5"/>
             </StackPanel>
 
             <!-- 中央：メモエリア -->
@@ -35,6 +35,7 @@
                 </StackPanel>-->
 
                 <!--<DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>-->
+
                 <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"/>
             </Grid>
         </DockPanel>
