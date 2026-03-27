@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleCSVEditorByWPF"
         xmlns:views="clr-namespace:SimpleCSVEditorByWPF.Views"
+        xmlns:viewmodels="clr-namespace:SimpleCSVEditorByWPF.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -19,8 +21,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <views:CsvFileReadView x:Name="CsvFileReadView" Grid.Row="0"/>
-                <views:CsvEditorView x:Name="CsvEditorView" Grid.Row="1"/>
+                <views:CsvFileReadView Grid.Row="0" DataContext="{Binding CsvFileReadVM}"/>
+                <views:CsvEditorView x:Name="CsvEditorView" Grid.Row="1" DataContext="{Binding CsvEditorVM}"/>
             </Grid>
         </DockPanel>
     </Grid>

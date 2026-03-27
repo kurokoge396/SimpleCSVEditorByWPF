@@ -1,6 +1,4 @@
-﻿using SimpleCSVEditorByWPF.Models;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SimpleCSVEditorByWPF
 {
@@ -9,11 +7,6 @@ namespace SimpleCSVEditorByWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        /// <summary>
-        /// ユーザーデータのリストを保持するプロパティ
-        /// </summary>
-        public BindingList<UserModel> UserModels = new BindingList<UserModel>();
 
         public MainWindow()
         {
