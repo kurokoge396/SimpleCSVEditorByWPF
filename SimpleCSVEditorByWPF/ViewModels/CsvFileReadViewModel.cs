@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using SimpleCSVEditorByWPF.Messages;
 using SimpleCSVEditorByWPF.Services;
 
 namespace SimpleCSVEditorByWPF.ViewModels
@@ -44,8 +46,8 @@ namespace SimpleCSVEditorByWPF.ViewModels
                 return;
             }
 
-            //UserModels = new BindingList<UserModel>(CsvFileService.LoadUserDataCsvData(CsvFilePathTextBox.Text));
-            //CsvDataGridView.ItemsSource = UserModels;
+            var data = CsvFileService.LoadUserDataCsvData(CsvFilePath);
+            WeakReferenceMessenger.Default.Send(new CsvDataLoadedMessage(data));
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using SimpleCSVEditorByWPF.Messages;
 using SimpleCSVEditorByWPF.Models;
 using SimpleCSVEditorByWPF.Services;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 
@@ -11,7 +13,15 @@ namespace SimpleCSVEditorByWPF.ViewModels
     public partial class CsvEditorViewModel : ObservableObject
     {
         [ObservableProperty]
-        private BindingList<UserModel> userModels;
+        private ObservableCollection<UserModel> userModels;
+
+        public CsvEditorViewModel()
+        {
+            WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
+            {
+                UserModels = new ObservableCollection<UserModel>(m.Data);
+            });
+        }
 
         /// <summary>
         /// 保存処理

@@ -9,18 +9,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DockPanel>
-            <!-- 上部：タイトルエリア -->
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
                 <Label Content="CSV読み込みくん" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <!-- 下部：ボタンエリア -->
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
-            HorizontalAlignment="Right" Margin="10">
-                <Button Content="保存" Width="80" Margin="5"/>
-            </StackPanel>
-
-            <!-- 中央：メモエリア -->
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -28,15 +20,7 @@
                 </Grid.RowDefinitions>
 
                 <views:CsvFileReadView x:Name="CsvFileReadView" Grid.Row="0"/>
-                <!--<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBox x:Name="CsvFilePathTextBox" AcceptsReturn="True" Margin="5" TextWrapping="Wrap" Width="585"/>
-                    <Button Content="ファイル選択" Width="80" Margin="5" Click="SelectFileButton_Click"/>
-                    <Button Content="ファイル読込" Width="80" Margin="5" Click="LoadCevFileButton_Click"/>
-                </StackPanel>-->
-
-                <!--<DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>-->
-
-                <DataGrid Grid.Row="1" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"/>
+                <views:CsvEditorView x:Name="CsvEditorView" Grid.Row="1"/>
             </Grid>
         </DockPanel>
     </Grid>
