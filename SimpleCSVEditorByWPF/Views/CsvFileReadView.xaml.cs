@@ -20,20 +20,6 @@ namespace SimpleCSVEditorByWPF.Views
         }
 
         /// <summary>
-        /// ファイル選択ボタンのクリックイベントハンドラー
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">e</param>
-        private void SelectFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            //var path = FileDialogService.SelectFilePath();
-            //if (!string.IsNullOrEmpty(path))
-            //{
-            //    CsvFilePathTextBox.Text = path;
-            //}
-        }
-
-        /// <summary>
         /// ファイル読み込みボタンのクリックイベントハンドラー
         /// </summary>
         /// <param name="sender">sender</param>
