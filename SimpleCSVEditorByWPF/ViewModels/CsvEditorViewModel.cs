@@ -22,9 +22,15 @@ namespace SimpleCSVEditorByWPF.ViewModels
     /// </summary>
     public partial class CsvEditorViewModel : ObservableObject, IHeaderConverter
     {
+        /// <summary>
+        /// データグリッドのモデルコレクション
+        /// </summary>
         [ObservableProperty]
         private ObservableCollection<UserModel> userModels;
 
+        /// <summary>
+        /// フォームを閉じるかどうかのフラグ
+        /// </summary>
         [ObservableProperty]
         private bool shouldClose;
 
