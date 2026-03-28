@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SimpleCSVEditorByWPF.Messages;
 using SimpleCSVEditorByWPF.Services;
+using System.IO;
 
 namespace SimpleCSVEditorByWPF.ViewModels
 {
@@ -12,7 +13,14 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// Csvファイルパス
         /// </summary>
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(LoadCsvFileCommand))]
         private string csvFilePath;
+
+        /// <summary>
+        /// CSVファイルが選択されているかどうか
+        /// </summary>
+        /// <returns>true:テキストボックスのファイルパス正常、false:不正</returns>
+        private bool CanLoadCsvFile() => !string.IsNullOrEmpty(CsvFilePath) && File.Exists(CsvFilePath);
 
         /// <summary>
         /// ファイルダイアログサービスインターフェイス
@@ -50,7 +58,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// <summary>
         /// ファイル読み込み
         /// </summary>
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanLoadCsvFile))]
         public async Task LoadCsvFileAsync()
         {
             if (string.IsNullOrEmpty(CsvFilePath))

@@ -26,7 +26,14 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// データグリッドのモデルコレクション
         /// </summary>
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SaveCsvFileCommand))]
         private ObservableCollection<UserModel> userModels;
+
+        /// <summary>
+        /// CSVファイルを保存できるかどうかのフラグ
+        /// </summary>
+        /// <returns>true:保存できる、false:保存できない</returns>
+        private bool CanSaveCsvFile() => UserModels != null && UserModels.Any();
 
         /// <summary>
         /// フォームを閉じるかどうかのフラグ
@@ -80,7 +87,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// <summary>
         /// 保存処理
         /// </summary>
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanSaveCsvFile))]
         public async Task SaveCsvFileAsync()
         {
             if (UserModels == null || !UserModels.Any())
@@ -107,10 +114,6 @@ namespace SimpleCSVEditorByWPF.ViewModels
             try
             {
                 WeakReferenceMessenger.Default.Send(new BusyMessage(false));
-
-                // 確認用後で消す
-                await Task.Delay(600000);
-
                 await _csvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
                 _messageDialogService.ShowInformation("保存が完了しました", "CSV読み込みくん");
                 ShouldClose = true;
