@@ -9,7 +9,11 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </Window.Resources>
+    
+    <Grid IsEnabled="{Binding IsBusy,Converter={StaticResource BoolToVisibility}}">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
                 <Label Content="CSV読み込みくん" VerticalAlignment="Center"/>

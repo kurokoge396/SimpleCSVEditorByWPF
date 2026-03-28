@@ -106,6 +106,11 @@ namespace SimpleCSVEditorByWPF.ViewModels
 
             try
             {
+                WeakReferenceMessenger.Default.Send(new BusyMessage(false));
+
+                // 確認用後で消す
+                await Task.Delay(600000);
+
                 await _csvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
                 _messageDialogService.ShowInformation("保存が完了しました", "CSV読み込みくん");
                 ShouldClose = true;
@@ -113,6 +118,10 @@ namespace SimpleCSVEditorByWPF.ViewModels
             catch (Exception ex)
             {
                 _messageDialogService.ShowError($"保存エラー: {ex.Message}", "CSV読み込みくん");
+            }
+            finally
+            {
+                WeakReferenceMessenger.Default.Send(new BusyMessage(true));
             }
         }
     }
