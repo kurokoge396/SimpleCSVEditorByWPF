@@ -51,7 +51,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// ファイル読み込み
         /// </summary>
         [RelayCommand]
-        public async Task LoadCevFile()
+        public async Task LoadCsvFileAsync()
         {
             if (string.IsNullOrEmpty(CsvFilePath))
             {

@@ -13,7 +13,7 @@
             <TextBox x:Name="CsvFilePathTextBox" AcceptsReturn="True" Margin="5" TextWrapping="Wrap" Width="585"
                      Text= "{Binding CsvFilePath, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="ファイル選択" Width="80" Margin="5" Command="{Binding SelectFileCommand}"/>
-            <Button Content="ファイル読込" Width="80" Margin="5" Command="{Binding LoadCevFileCommand}"/>
+            <Button Content="ファイル読込" Width="80" Margin="5" Command="{Binding LoadCsvFileCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>
