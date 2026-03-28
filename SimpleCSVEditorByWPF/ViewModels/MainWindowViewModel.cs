@@ -20,7 +20,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// 活性非活性管理用プロパティ
         /// </summary>
         [ObservableProperty]
-        private bool isBusy = true;
+        private bool isViewEnabled = true;
 
         /// <summary>
         /// コンストラクタ
@@ -34,7 +34,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
 
             WeakReferenceMessenger.Default.Register<BusyMessage>(this, (r, m) =>
             {
-                IsBusy = m.IsBusy;
+                IsViewEnabled = m.IsViewEnabled;
             });
         }
     }

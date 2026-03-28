@@ -13,7 +13,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </Window.Resources>
     
-    <Grid IsEnabled="{Binding IsBusy,Converter={StaticResource BoolToVisibility}}">
+    <Grid IsEnabled="{Binding IsViewEnabled}">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
                 <Label Content="CSV読み込みくん" VerticalAlignment="Center"/>

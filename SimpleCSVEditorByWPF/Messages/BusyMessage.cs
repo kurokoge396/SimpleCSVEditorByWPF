@@ -8,12 +8,12 @@
         /// <summary>
         /// 処理中かどうか
         /// </summary>
-        public bool IsBusy { get; }
+        public bool IsViewEnabled { get; }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="isBusy">処理状態</param>
-        public BusyMessage(bool isBusy) => IsBusy = isBusy;
+        /// <param name="isViewEnabled">処理状態</param>
+        public BusyMessage(bool isViewEnabled) => IsViewEnabled = isViewEnabled;
     }
 }
