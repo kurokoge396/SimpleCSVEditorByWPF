@@ -6,7 +6,6 @@ using SimpleCSVEditorByWPF.Models;
 using SimpleCSVEditorByWPF.Services;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows;
 
 namespace SimpleCSVEditorByWPF.ViewModels
 {
@@ -34,9 +33,15 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// </summary>
         private readonly IFileDialogService _fileDialogService;
 
-        public CsvEditorViewModel(IFileDialogService filePathService)
+        /// <summary>
+        /// メッセージダイアログサービスインターフェイス
+        /// </summary>
+        private readonly IMessageDialogService _messageDialogService;
+
+        public CsvEditorViewModel(IFileDialogService filePathService, IMessageDialogService messageDialogService)
         {
             _fileDialogService = filePathService;
+            _messageDialogService = messageDialogService;
             WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
             {
                 UserModels = new ObservableCollection<UserModel>(m.Data);
@@ -68,7 +73,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         {
             if (UserModels == null || !UserModels.Any())
             {
-                MessageBox.Show("保存するデータがありません。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                _messageDialogService.ShowWaring("保存するデータがありません。", "警告");
                 return;
             }
 
@@ -80,9 +85,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
             }
             else if (File.Exists(filePath))
             {
-                var msg = MessageBox.Show("同名のファイルが既に存在します。上書き保存しますか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (msg == MessageBoxResult.No)
+                if (_messageDialogService.ShowConfirm("同名のファイルが既に存在します。上書き保存しますか？", "確認"))
                 {
                     return;
                 }
@@ -91,12 +94,12 @@ namespace SimpleCSVEditorByWPF.ViewModels
             try
             {
                 CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
-                MessageBox.Show("保存が完了しました", "CSV読み込みくん", MessageBoxButton.OK, MessageBoxImage.Information);
+                _messageDialogService.ShowInformation("保存が完了しました", "CSV読み込みくん");
                 ShouldClose = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"保存エラー: {ex.Message}");
+                _messageDialogService.ShowError($"保存エラー: {ex.Message}", "CSV読み込みくん");
             }
         }
     }
