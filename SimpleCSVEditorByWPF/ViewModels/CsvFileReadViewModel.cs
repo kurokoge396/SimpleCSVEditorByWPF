@@ -45,15 +45,18 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// ファイル読み込み
         /// </summary>
         [RelayCommand]
-        public void LoadCevFile()
+        public async Task LoadCevFile()
         {
             if (string.IsNullOrEmpty(CsvFilePath))
             {
                 return;
             }
 
-            var data = CsvFileService.LoadUserDataCsvData(CsvFilePath);
-            WeakReferenceMessenger.Default.Send(new CsvDataLoadedMessage(data));
+            var data = await CsvFileService.LoadUserDataCsvData(CsvFilePath);
+            if (data.Any())
+            {
+                WeakReferenceMessenger.Default.Send(new CsvDataLoadedMessage(data));
+            }
         }
     }
 }

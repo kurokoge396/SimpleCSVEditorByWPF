@@ -69,7 +69,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// 保存処理
         /// </summary>
         [RelayCommand]
-        public void SaveCsvFile()
+        public async Task SaveCsvFile()
         {
             if (UserModels == null || !UserModels.Any())
             {
@@ -93,7 +93,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
 
             try
             {
-                CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
+                await CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
                 _messageDialogService.ShowInformation("保存が完了しました", "CSV読み込みくん");
                 ShouldClose = true;
             }
