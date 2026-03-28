@@ -79,7 +79,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         {
             if (UserModels == null || !UserModels.Any())
             {
-                _messageDialogService.ShowWaring("保存するデータがありません。", "警告");
+                _messageDialogService.ShowWarning("保存するデータがありません。", "警告");
                 return;
             }
 
@@ -91,7 +91,8 @@ namespace SimpleCSVEditorByWPF.ViewModels
             }
             else if (File.Exists(filePath))
             {
-                if (_messageDialogService.ShowConfirm("同名のファイルが既に存在します。上書き保存しますか？", "確認"))
+                // 「いいえ」を選択した場合（false）にreturnで中断する
+                if (!_messageDialogService.ShowConfirm("同名のファイルが既に存在します。上書き保存しますか？", "確認"))
                 {
                     return;
                 }

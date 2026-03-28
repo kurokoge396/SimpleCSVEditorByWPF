@@ -8,7 +8,7 @@ namespace SimpleCSVEditorByWPF.Services
     public interface IMessageDialogService
     {
         public void ShowInformation(string message, string title);
-        public void ShowWaring(string message, string title);
+        public void ShowWarning(string message, string title);
         public void ShowError(string message, string title);
         public bool ShowConfirm(string message, string title);
     }
@@ -33,7 +33,7 @@ namespace SimpleCSVEditorByWPF.Services
         /// </summary>
         /// <param name="message">メッセージ</param>
         /// <param name="title">タイトル</param>
-        public void ShowWaring(string message, string title)
+        public void ShowWarning(string message, string title)
         {
             MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
