@@ -20,12 +20,18 @@ namespace SimpleCSVEditorByWPF.ViewModels
         private readonly IFileDialogService _fileDialogService;
 
         /// <summary>
+        /// CSVファイルサービス
+        /// </summary>
+        private readonly ICsvFileService _csvFileService;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="filePathService"></param>
-        public CsvFileReadViewModel(IFileDialogService filePathService)
+        public CsvFileReadViewModel(IFileDialogService filePathService, ICsvFileService csvFileService)
         {
             _fileDialogService = filePathService;
+            _csvFileService = csvFileService;
         }
 
         /// <summary>
@@ -52,7 +58,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
                 return;
             }
 
-            var data = await CsvFileService.LoadUserDataCsvData(CsvFilePath);
+            var data = await _csvFileService.LoadUserDataCsvData(CsvFilePath);
             if (data.Any())
             {
                 WeakReferenceMessenger.Default.Send(new CsvDataLoadedMessage(data));

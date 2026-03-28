@@ -34,13 +34,19 @@ namespace SimpleCSVEditorByWPF.ViewModels
         private readonly IFileDialogService _fileDialogService;
 
         /// <summary>
+        /// CSVファイルサービスインターフェイス
+        /// </summary>
+        private readonly ICsvFileService _csvFileService;
+
+        /// <summary>
         /// メッセージダイアログサービスインターフェイス
         /// </summary>
         private readonly IMessageDialogService _messageDialogService;
 
-        public CsvEditorViewModel(IFileDialogService filePathService, IMessageDialogService messageDialogService)
+        public CsvEditorViewModel(IFileDialogService filePathService, IMessageDialogService messageDialogService, ICsvFileService csvFileService)
         {
             _fileDialogService = filePathService;
+            _csvFileService = csvFileService;
             _messageDialogService = messageDialogService;
             WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
             {
@@ -93,7 +99,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
 
             try
             {
-                await CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
+                await _csvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
                 _messageDialogService.ShowInformation("保存が完了しました", "CSV読み込みくん");
                 ShouldClose = true;
             }

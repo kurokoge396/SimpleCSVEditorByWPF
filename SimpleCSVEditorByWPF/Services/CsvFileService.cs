@@ -7,16 +7,25 @@ using System.Text;
 namespace SimpleCSVEditorByWPF.Services
 {
     /// <summary>
+    /// CSVファイルサービスのインターフェイス
+    /// </summary>
+    public interface ICsvFileService
+    {
+        Task<List<UserModel>> LoadUserDataCsvData(string filePath);
+        Task SaveUserDataCsvData(string filePath, List<UserModel> userData);
+    }
+
+    /// <summary>
     /// CSVファイルの読み書きを行うサービスクラス
     /// </summary>
-    public static class CsvFileService
+    public class CsvFileService : ICsvFileService
     {
         /// <summary>
         /// CSVファイルからユーザーデータを読み込むメソッド
         /// </summary>
         /// <param name="filePath">ファイルパス</param>
         /// <returns>ユーザーデータリスト</returns>
-        public static async Task<List<UserModel>> LoadUserDataCsvData(string filePath)
+        public async Task<List<UserModel>> LoadUserDataCsvData(string filePath)
         {
             return await Task.Run(() =>
              {
@@ -42,7 +51,7 @@ namespace SimpleCSVEditorByWPF.Services
         /// </summary>
         /// <param name="filePath">ファイルパス</param>
         /// <param name="userData">ユーザーデータ</param>
-        public static async Task SaveUserDataCsvData(string filePath, List<UserModel> userData)
+        public async Task SaveUserDataCsvData(string filePath, List<UserModel> userData)
         {
             await Task.Run(() =>
             {
