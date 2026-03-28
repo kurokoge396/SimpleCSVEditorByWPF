@@ -8,9 +8,15 @@ namespace SimpleCSVEditorByWPF.ViewModels
 {
     public partial class CsvFileReadViewModel : ObservableObject
     {
+        /// <summary>
+        /// Csvファイルパス
+        /// </summary>
         [ObservableProperty]
         private string csvFilePath;
 
+        /// <summary>
+        /// ファイルダイアログサービスインターフェイス
+        /// </summary>
         private readonly IFileDialogService _fileDialogService;
 
         /// <summary>

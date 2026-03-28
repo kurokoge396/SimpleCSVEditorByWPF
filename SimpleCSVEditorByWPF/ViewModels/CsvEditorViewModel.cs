@@ -10,18 +10,33 @@ using System.Windows;
 
 namespace SimpleCSVEditorByWPF.ViewModels
 {
+    /// <summary>
+    /// ヘッダー変換用のインターフェース
+    /// </summary>
     public interface IHeaderConverter
     {
         string ConvertHeader(string propertyName);
     }
 
+    /// <summary>
+    /// CsvEditorのViewModel
+    /// </summary>
     public partial class CsvEditorViewModel : ObservableObject, IHeaderConverter
     {
         [ObservableProperty]
         private ObservableCollection<UserModel> userModels;
 
-        public CsvEditorViewModel()
+        [ObservableProperty]
+        private bool shouldClose;
+
+        /// <summary>
+        /// ファイルダイアログサービスインターフェイス
+        /// </summary>
+        private readonly IFileDialogService _fileDialogService;
+
+        public CsvEditorViewModel(IFileDialogService filePathService)
         {
+            _fileDialogService = filePathService;
             WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
             {
                 UserModels = new ObservableCollection<UserModel>(m.Data);
@@ -51,14 +66,13 @@ namespace SimpleCSVEditorByWPF.ViewModels
         [RelayCommand]
         public void SaveCsvFile()
         {
-            if (!UserModels.Any())
+            if (UserModels == null || !UserModels.Any())
             {
                 MessageBox.Show("保存するデータがありません。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            //var filePath = FileDialogService.GetSaveFilePath();
-            var filePath = string.Empty;
+            var filePath = _fileDialogService.GetSaveFilePath();
 
             if (string.IsNullOrEmpty(filePath))
             {
@@ -78,7 +92,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
             {
                 CsvFileService.SaveUserDataCsvData(filePath, UserModels.ToList());
                 MessageBox.Show("保存が完了しました", "CSV読み込みくん", MessageBoxButton.OK, MessageBoxImage.Information);
-                //Close();
+                ShouldClose = true;
             }
             catch (Exception ex)
             {
