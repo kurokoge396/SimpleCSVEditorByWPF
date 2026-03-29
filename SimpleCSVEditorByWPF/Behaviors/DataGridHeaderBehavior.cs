@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xaml.Behaviors;
-using SimpleCSVEditorByWPF.ViewModels;
+using SimpleCSVEditorByWPF.Services;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -55,7 +55,7 @@ namespace SimpleCSVEditorByWPF.Behaviors
         /// <param name="e">e</param>
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (AssociatedObject.DataContext is IHeaderConverter converter)
+            if (AssociatedObject.DataContext is IHeaderConvertService converter)
             {
                 e.Column.Header = converter.ConvertHeader(e.PropertyName);
             }

@@ -10,17 +10,9 @@ using System.IO;
 namespace SimpleCSVEditorByWPF.ViewModels
 {
     /// <summary>
-    /// ヘッダー変換用のインターフェース
-    /// </summary>
-    public interface IHeaderConverter
-    {
-        string ConvertHeader(string propertyName);
-    }
-
-    /// <summary>
     /// CsvEditorのViewModel
     /// </summary>
-    public partial class CsvEditorViewModel : ObservableObject, IHeaderConverter
+    public partial class CsvEditorViewModel : ObservableObject
     {
         /// <summary>
         /// データグリッドのモデルコレクション
@@ -56,32 +48,24 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// </summary>
         private readonly IMessageDialogService _messageDialogService;
 
-        public CsvEditorViewModel(IFileDialogService filePathService, IMessageDialogService messageDialogService, ICsvFileService csvFileService)
+        /// <summary>
+        /// ヘッダー変換サービスインターフェイス
+        /// </summary>
+        private readonly IHeaderConvertService _headerConvertService;
+
+        public CsvEditorViewModel(IFileDialogService filePathService,
+                                  IMessageDialogService messageDialogService,
+                                  ICsvFileService csvFileService,
+                                  IHeaderConvertService headerConvertService)
         {
             _fileDialogService = filePathService;
             _csvFileService = csvFileService;
             _messageDialogService = messageDialogService;
+            _headerConvertService = headerConvertService;
             WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
             {
                 UserModels = new ObservableCollection<UserModel>(m.Data);
             });
-        }
-
-        /// <summary>
-        /// ヘッダー名をDatagridの列名に変換する
-        /// </summary>
-        /// <param name="propertyName">プロパティ名</param>
-        /// <returns>列名</returns>
-        public string ConvertHeader(string propertyName)
-        {
-            return propertyName switch
-            {
-                "Id" => "ID",
-                "Name" => "名前",
-                "Password" => "パスワード",
-                "IsDeleted" => "削除フラグ",
-                _ => propertyName
-            };
         }
 
         /// <summary>

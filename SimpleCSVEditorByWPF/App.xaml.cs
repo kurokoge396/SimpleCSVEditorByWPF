@@ -17,10 +17,11 @@ namespace SimpleCSVEditorByWPF
             var csvFileService = new CsvFileService();
             var dialogService = new FileDialogService();
             var messageDialogService = new MessageDialogService();
+            var headerConvertService = new HeaderConvertService();
 
             // ViewModelを作成（依存性注入）
             var csvReadViewModel = new CsvFileReadViewModel(dialogService, csvFileService);
-            var csvEditorViewModel = new CsvEditorViewModel(dialogService, messageDialogService, csvFileService);
+            var csvEditorViewModel = new CsvEditorViewModel(dialogService, messageDialogService, csvFileService, headerConvertService);
             var mainWindowViewModel = new MainWindowViewModel(csvReadViewModel, csvEditorViewModel);
 
             // MainWindowを作成し、ViewModelを設定（依存性注入）
