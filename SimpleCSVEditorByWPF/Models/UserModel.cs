@@ -26,6 +26,15 @@ namespace SimpleCSVEditorByWPF.Models
         /// 削除フラグ
         /// </summary>
         public int IsDeleted { get; set; }
+
+        /// <summary>
+        /// ユーザーデータが存在するかどうかを判定するメソッド
+        /// </summary>
+        /// <returns>true:ユーザーデータが存在する、false:存在しない</returns>
+        public bool IsAnyRecord()
+        {
+            return !string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Password);
+        }
     }
 
     /// <summary>

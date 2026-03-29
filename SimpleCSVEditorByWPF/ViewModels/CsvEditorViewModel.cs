@@ -33,7 +33,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// CSVファイルを保存できるかどうかのフラグ
         /// </summary>
         /// <returns>true:保存できる、false:保存できない</returns>
-        private bool CanSaveCsvFile() => UserModels != null && UserModels.Any();
+        private bool CanSaveCsvFile() => UserModels != null && (UserModels.Count > 0 || UserModels.Any(u => u.IsAnyRecord()));
 
         /// <summary>
         /// フォームを閉じるかどうかのフラグ
