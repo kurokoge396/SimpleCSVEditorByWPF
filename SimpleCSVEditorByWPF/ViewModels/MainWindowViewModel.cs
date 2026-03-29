@@ -4,7 +4,7 @@ using SimpleCSVEditorByWPF.Messages;
 
 namespace SimpleCSVEditorByWPF.ViewModels
 {
-    public partial class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel : ObservableRecipient, IRecipient<BusyMessage>
     {
         /// <summary>
         /// CsvFileReadViewModelのインスタンス
@@ -32,10 +32,16 @@ namespace SimpleCSVEditorByWPF.ViewModels
             CsvFileReadVM = csvFileReadVM;
             CsvEditorVM = csvEditorVM;
 
-            WeakReferenceMessenger.Default.Register<BusyMessage>(this, (r, m) =>
-            {
-                IsViewEnabled = m.IsViewEnabled;
-            });
+            IsActive = true;
+        }
+
+        /// <summary>
+        /// BusyMessageを受信したときの処理
+        /// </summary>
+        /// <param name="message"></param>
+        public void Receive(BusyMessage message)
+        {
+            IsViewEnabled = message.IsViewEnabled;
         }
     }
 }

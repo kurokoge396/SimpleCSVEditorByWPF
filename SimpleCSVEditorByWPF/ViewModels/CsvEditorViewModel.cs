@@ -12,7 +12,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
     /// <summary>
     /// CsvEditorのViewModel
     /// </summary>
-    public partial class CsvEditorViewModel : ObservableObject
+    public partial class CsvEditorViewModel : ObservableRecipient, IRecipient<CsvDataLoadedMessage>
     {
         /// <summary>
         /// データグリッドのモデルコレクション
@@ -53,6 +53,13 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// </summary>
         private readonly IHeaderConvertService _headerConvertService;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="filePathService">ファイルパスサービス</param>
+        /// <param name="messageDialogService">メッセージダイアログサービス</param>
+        /// <param name="csvFileService">CSVファイルサービス</param>
+        /// <param name="headerConvertService">ヘッダー変換サービス</param>
         public CsvEditorViewModel(IFileDialogService filePathService,
                                   IMessageDialogService messageDialogService,
                                   ICsvFileService csvFileService,
@@ -62,10 +69,17 @@ namespace SimpleCSVEditorByWPF.ViewModels
             _csvFileService = csvFileService;
             _messageDialogService = messageDialogService;
             _headerConvertService = headerConvertService;
-            WeakReferenceMessenger.Default.Register<CsvDataLoadedMessage>(this, (r, m) =>
-            {
-                UserModels = new ObservableCollection<UserModel>(m.Data);
-            });
+
+            IsActive = true;
+        }
+
+        /// <summary>
+        /// CSVデータが読み込まれたときの処理
+        /// </summary>
+        /// <param name="message"></param>
+        public void Receive(CsvDataLoadedMessage message)
+        {
+            UserModels = new ObservableCollection<UserModel>(message.Data);
         }
 
         /// <summary>
