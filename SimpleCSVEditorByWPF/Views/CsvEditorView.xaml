@@ -20,7 +20,7 @@
         <DataGrid Grid.Row="0" Name="CsvDataGridView" AutoGenerateColumns="True" ColumnWidth="*"
                   ItemsSource="{Binding UserModels, Mode=TwoWay}">
             <i:Interaction.Behaviors>
-                <behaviors:DataGridHeaderBehavior/>
+                <behaviors:DataGridHeaderBehavior HeaderConverter="{Binding HeaderConverter}"/>
                 <behaviors:CollectionChangedNotifyBehavior Collection="{Binding UserModels}" Command="{Binding SaveCsvFileCommand}"/>
             </i:Interaction.Behaviors>
         </DataGrid>

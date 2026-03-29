@@ -69,6 +69,11 @@ namespace SimpleCSVEditorByWPF.ViewModels
         }
 
         /// <summary>
+        /// ヘッダー変換用のデリゲート
+        /// </summary>
+        public Func<string, string> HeaderConverter => _headerConvertService.ConvertHeader;
+
+        /// <summary>
         /// 保存処理
         /// </summary>
         [RelayCommand(CanExecute = nameof(CanSaveCsvFile))]

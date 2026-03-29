@@ -55,9 +55,9 @@ namespace SimpleCSVEditorByWPF.Behaviors
         /// <param name="e">e</param>
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (AssociatedObject.DataContext is IHeaderConvertService converter)
+            if (HeaderConverter != null)
             {
-                e.Column.Header = converter.ConvertHeader(e.PropertyName);
+                e.Column.Header = HeaderConverter(e.PropertyName);
             }
         }
     }
