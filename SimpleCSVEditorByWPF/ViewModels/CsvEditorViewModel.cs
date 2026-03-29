@@ -29,6 +29,23 @@ namespace SimpleCSVEditorByWPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(SaveCsvFileCommand))]
         private ObservableCollection<UserModel> userModels;
 
+        partial void OnUserModelsChanged(ObservableCollection<UserModel> oldValue, ObservableCollection<UserModel> newValue)
+        {
+            if (oldValue != null)
+            {
+                oldValue.CollectionChanged -= UserModels_CollectionChanged;
+            }
+            if (newValue != null)
+            {
+                newValue.CollectionChanged += UserModels_CollectionChanged;
+            }
+        }
+
+        private void UserModels_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            SaveCsvFileCommand.NotifyCanExecuteChanged();
+        }
+
         /// <summary>
         /// CSVファイルを保存できるかどうかのフラグ
         /// </summary>
