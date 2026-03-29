@@ -20,7 +20,7 @@ namespace SimpleCSVEditorByWPF.ViewModels
         /// CSVファイルが選択されているかどうか
         /// </summary>
         /// <returns>true:テキストボックスのファイルパス正常、false:不正</returns>
-        private bool CanLoadCsvFile() => !string.IsNullOrEmpty(CsvFilePath) && File.Exists(CsvFilePath);
+        private bool CanLoadCsvFile() => !string.IsNullOrEmpty(CsvFilePath) && File.Exists(CsvFilePath) && Path.GetExtension(CsvFilePath) == ".csv";
 
         /// <summary>
         /// ファイルダイアログサービスインターフェイス
@@ -61,11 +61,6 @@ namespace SimpleCSVEditorByWPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanLoadCsvFile))]
         public async Task LoadCsvFileAsync()
         {
-            if (string.IsNullOrEmpty(CsvFilePath))
-            {
-                return;
-            }
-
             var data = await _csvFileService.LoadUserDataCsvData(CsvFilePath);
             if (data.Any())
             {

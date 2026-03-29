@@ -68,6 +68,9 @@ csharp_style_prefer_switch_expression = true:suggestion
 # CS8622: パラメーターの型における参照型の NULL 値の許容が、ターゲット デリゲートと一致しません。おそらく、NULL 値の許容の属性が原因です。
 dotnet_diagnostic.CS8622.severity = none
 
+# CA1860: 'Enumerable.Any()' 拡張メソッドを使用しないでください
+dotnet_diagnostic.CA1860.severity = none
+
 [*.vb]
 #### 命名スタイル ####
 
